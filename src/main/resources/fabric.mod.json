@@ -1,13 +1,13 @@
 
 {
   "schemaVersion": 1,
-  "id": "modid",
-  "version": "${version}",
+  "id": "colorunchained",
+  "version": "1.0.0",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Color Unchained",
+  "description": "Color Unchained brings color back to your life.",
   "authors": [
-    "Me!"
+    "Draylar"
   ],
   "contact": {
     "homepage": "https://fabricmc.net/",
@@ -15,16 +15,16 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/colorunchained/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.draylar.modid.ExampleMod"
+      "com.github.draylar.cu.ColorUnchained"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "colorunchained.mixins.json"
   ],
 
   "requires": {

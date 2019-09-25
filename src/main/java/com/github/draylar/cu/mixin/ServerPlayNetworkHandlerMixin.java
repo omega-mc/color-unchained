@@ -13,9 +13,9 @@ public class ServerPlayNetworkHandlerMixin {
 
     @ModifyVariable(at = @At(
             value = "INVOKE",
-            target = "Ljava/lang/String;length()I",
-            shift = At.Shift.AFTER
-    ), method = "onChatMessage", name = "string_1")
+            target = "Ljava/lang/String;startsWith(Ljava/lang/String;)Z",
+            shift = At.Shift.BEFORE
+    ), method = "onChatMessage", ordinal = 0)
     private String onChatMessage(String string_1) {
         return string_1.replace("%%", "§");
     }

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class SharedConstantsMixin {
 
     @Inject(at = @At("HEAD"), method = "isAllowedCharacter", cancellable = true)
-    private static void isAllowedCharacter(char char_1, CallbackInfoReturnable<Boolean> cir) {
+    private static void isAllowedCharacter(char character, CallbackInfoReturnable<Boolean> cir) {
         cir.setReturnValue(true);
     }
 }

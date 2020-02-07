@@ -31,8 +31,8 @@ public abstract class AnvilScreenMixin extends Screen {
 
     private ArrayList<ColorButtonWidget> colors = new ArrayList<>();
 
-    protected AnvilScreenMixin(ITextComponent text_1) {
-        super(text_1);
+    protected AnvilScreenMixin(ITextComponent titleIn) {
+        super(titleIn);
     }
 
     private void toggleVisible() {
@@ -49,7 +49,7 @@ public abstract class AnvilScreenMixin extends Screen {
         for(ChatFormatting color : ChatFormatting.values()) {
             index++;
             ColorButtonWidget red = new ColorButtonWidget(color,18 * index + 3, 2, 16, 16, color.name(), (widget) -> {
-                nameField.setText("§" + color.func_225041_a());
+                nameField.setText("\u00a7" + color.func_225041_a());
                 this.setFocused(nameField);
             });
 

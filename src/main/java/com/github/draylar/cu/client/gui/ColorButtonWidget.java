@@ -51,19 +51,19 @@ public class ColorButtonWidget extends Button {
             String icon = "";
             switch(formatting) {
                 case UNDERLINE:
-                    icon = "§nb";
+                    icon = "\u00a7nb";
                     break;
                 case OBFUSCATED:
-                    icon = "§kb";
+                    icon = "\u00a7kb";
                     break;
                 case BOLD:
-                    icon = "§lb";
+                    icon = "\u00a7lb";
                     break;
                 case STRIKETHROUGH:
-                    icon = "§mb";
+                    icon = "\u00a7mb";
                     break;
                 case ITALIC:
-                    icon = "§ob";
+                    icon = "\u00a7ob";
                     break;
                 case RESET:
                     icon = "R";

@@ -16,7 +16,7 @@ public class ServerPlayNetworkHandlerMixin {
             target = "Ljava/lang/String;startsWith(Ljava/lang/String;)Z",
             shift = At.Shift.BEFORE
     ), method = "processChatMessage", ordinal = 0)
-    private String processChatMessage(String string_1) {
-        return string_1.replace("%%", "§");
+    private String processChatMessage(String s) {
+        return s.replace("%%", "§");
     }
 }

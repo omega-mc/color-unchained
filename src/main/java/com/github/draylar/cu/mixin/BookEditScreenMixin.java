@@ -56,8 +56,8 @@ public abstract class BookEditScreenMixin extends Screen {
 
     private ArrayList<ColorButtonWidget> colors = new ArrayList<>();
 
-    protected BookEditScreenMixin(ITextComponent text_1) {
-        super(text_1);
+    protected BookEditScreenMixin(ITextComponent titleIn) {
+        super(titleIn);
     }
 
     private void toggleVisible() {
@@ -67,11 +67,11 @@ public abstract class BookEditScreenMixin extends Screen {
     }
 
     @Inject(at = @At("HEAD"), method = "mouseClicked", cancellable = true)
-    private void mouseClicked(double double_1, double double_2, int int_1, CallbackInfoReturnable<Boolean> cir) {
+    private void mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_, CallbackInfoReturnable<Boolean> cir) {
         buttons.forEach(button -> {
             if(button instanceof ColorToggleWidget || button instanceof ColorButtonWidget) {
                 if (button.isHovered()) {
-                    button.onClick(double_1, double_2);
+                    button.onClick(p_mouseClicked_1_, p_mouseClicked_3_);
                     cir.cancel();
                 }
             }

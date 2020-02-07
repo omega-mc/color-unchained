@@ -1,14 +1,16 @@
 package com.github.draylar.cu;
 
-import net.fabricmc.api.ModInitializer;
+import com.github.draylar.cu.util.Utils;
+import net.minecraftforge.fml.common.Mod;
 
-public class ColorUnchained implements ModInitializer
+@Mod("colorunchained")
+public class ColorUnchained
 {
-	public static final String MODID = "colorunchained";
-
-	@Override
-	public void onInitialize()
-	{
-
+	public ColorUnchained() {
+		if(!Utils.isMixinInClasspath()) throw new IllegalStateException(
+				"This is an expected crash because MixinBootstrap isn't (properly) installed. " +
+						"You can download it from: https://github.com/LXGaming/MixinBootstrap/releases "+
+						"Copy the jar into your mods folder."
+		);
 	}
 }

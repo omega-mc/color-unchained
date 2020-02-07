@@ -1,0 +1,29 @@
+modLoader="javafml"
+loaderVersion="[31,)"
+#issueTrackerURL="https://github.com/"
+
+[[mods]]
+modId="colorunchained"
+version="${file.jarVersion}"
+displayName="Color Unchained"
+#displayURL=""
+logoFile="assets/colorunchained/icon.png"
+credits="Thanks to the Forge Team for their work"
+authors="Draylar, JayJay1989BE"
+description='''
+Color Unchained brings color back to your life.
+'''
+
+[[dependencies.colorunchained]]
+    modId="forge"
+    mandatory=true
+    versionRange="[31,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.colorunchained]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.15.2]"
+    ordering="NONE"
+    side="BOTH"

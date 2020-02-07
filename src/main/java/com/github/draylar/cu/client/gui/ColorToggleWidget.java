@@ -1,22 +1,23 @@
 package com.github.draylar.cu.client.gui;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.widget.ButtonWidget;
+import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.client.gui.widget.button.Button;
 
 import java.awt.*;
 
-public class ColorToggleWidget extends ButtonWidget {
+public class ColorToggleWidget extends Button {
 
     private int x;
     private int y;
 
     int index = 0;
 
-    private PressAction pressAction;
+    private  Button.IPressable pressAction;
 
-    public ColorToggleWidget(int x, int y, int width, int height, String text, PressAction pressAction) {
+    public ColorToggleWidget(int x, int y, int width, int height, String text,  Button.IPressable pressAction) {
         super(x, y, width, height, text, pressAction);
         this.x = x;
         this.y = y;
@@ -34,14 +35,14 @@ public class ColorToggleWidget extends ButtonWidget {
 
     @Override
     public void render(int mouseX, int mouseY, float float_1) {
-        MinecraftClient client = MinecraftClient.getInstance();
+        Minecraft client = Minecraft.getInstance();
         client.getTextureManager().bindTexture(WIDGETS_LOCATION);
 
-        GlStateManager.color4f(1.0F, 1.0F, 1.0F, this.alpha);
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, this.alpha);
         int int_3 = this.getYImage(this.isHovered());
-        GlStateManager.enableBlend();
-        GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        RenderSystem.enableBlend();
+        RenderSystem.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+        RenderSystem.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
 
         this.blit(this.x, this.y, 0, 46 + int_3 * 20, this.width / 2, this.height + 4);
         this.blit(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + int_3 * 20, this.width / 2, this.height + 4);
@@ -51,7 +52,7 @@ public class ColorToggleWidget extends ButtonWidget {
         double green = Math.sin(.03 * index + 2) * 127 + 128;
         double blue = Math.sin(.03 * index + 4) * 127 + 128;
 
-        DrawableHelper.fill(x + 5, y + 5, x + 11, y + 14, new Color((int) red, (int) green, (int) blue).getRGB());
+        AbstractGui.fill(x + 5, y + 5, x + 11, y + 14, new Color((int) red, (int) green, (int) blue).getRGB());
 
         index++;
 

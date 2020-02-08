@@ -4,9 +4,9 @@ import com.github.draylar.cu.client.gui.ColorButtonWidget;
 import com.github.draylar.cu.client.gui.ColorToggleWidget;
 import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.AnvilScreen;
+import net.minecraft.client.gui.screen.inventory.AnvilScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.text.Text;
+import net.minecraft.util.text.ITextComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -31,8 +31,8 @@ public abstract class AnvilScreenMixin extends Screen {
 
     private ArrayList<ColorButtonWidget> colors = new ArrayList<>();
 
-    protected AnvilScreenMixin(Text text_1) {
-        super(text_1);
+    protected AnvilScreenMixin(ITextComponent titleIn) {
+        super(titleIn);
     }
 
     private void toggleVisible() {
@@ -48,8 +48,8 @@ public abstract class AnvilScreenMixin extends Screen {
 
         for(ChatFormatting color : ChatFormatting.values()) {
             index++;
-            ColorButtonWidget red = new ColorButtonWidget(color,18 * index + 3, 2, 16, 16, color.getName(), (widget) -> {
-                nameField.addText("§" + color.getChar());
+            ColorButtonWidget red = new ColorButtonWidget(color,18 * index + 3, 2, 16, 16, color.name(), (widget) -> {
+                nameField.setText("\u00a7" + color.func_225041_a());
                 this.setFocused(nameField);
             });
 

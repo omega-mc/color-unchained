@@ -3,10 +3,10 @@ package com.github.draylar.cu.mixin;
 import com.github.draylar.cu.client.gui.ColorButtonWidget;
 import com.github.draylar.cu.client.gui.ColorToggleWidget;
 import com.mojang.realmsclient.gui.ChatFormatting;
+import net.minecraft.client.gui.screen.EditBookScreen;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.BookEditScreen;
-import net.minecraft.client.gui.screen.ingame.PageTurnWidget;
-import net.minecraft.text.Text;
+import net.minecraft.client.gui.widget.button.ChangePageButton;
+import net.minecraft.util.text.ITextComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,19 +20,19 @@ import java.util.ArrayList;
   Mixin for adding the color picker to the book edit screen.
   Also allows for typing the special formatting character.
  */
-@Mixin(BookEditScreen.class)
+@Mixin(EditBookScreen.class)
 public abstract class BookEditScreenMixin extends Screen {
 
-    @Shadow protected abstract void writeString(String string_1);
+    @Shadow protected abstract void insertTextIntoPage(String string_1);
 
     @Shadow public abstract boolean keyPressed(int int_1, int int_2, int int_3);
 
     @Shadow public abstract boolean charTyped(char char_1, int int_1);
 
-    @Shadow private PageTurnWidget buttonNextPage;
+    @Shadow private ChangePageButton buttonNextPage;
 
-    @Inject(at = @At("HEAD"), method = "stripFromatting", cancellable = true)
-    private void stripFromatting(String string_1, CallbackInfoReturnable<String> info) {
+    @Inject(at = @At("HEAD"), method = "removeUnprintableChars", cancellable = true)
+    private void removeUnprintableChars(String string_1, CallbackInfoReturnable<String> info) {
         StringBuilder stringBuilder_1 = new StringBuilder();
         char[] var3 = string_1.toCharArray();
         int var4 = var3.length;
@@ -56,8 +56,8 @@ public abstract class BookEditScreenMixin extends Screen {
 
     private ArrayList<ColorButtonWidget> colors = new ArrayList<>();
 
-    protected BookEditScreenMixin(Text text_1) {
-        super(text_1);
+    protected BookEditScreenMixin(ITextComponent titleIn) {
+        super(titleIn);
     }
 
     private void toggleVisible() {
@@ -67,11 +67,11 @@ public abstract class BookEditScreenMixin extends Screen {
     }
 
     @Inject(at = @At("HEAD"), method = "mouseClicked", cancellable = true)
-    private void mouseClicked(double double_1, double double_2, int int_1, CallbackInfoReturnable<Boolean> cir) {
+    private void mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_, CallbackInfoReturnable<Boolean> cir) {
         buttons.forEach(button -> {
             if(button instanceof ColorToggleWidget || button instanceof ColorButtonWidget) {
                 if (button.isHovered()) {
-                    button.onClick(double_1, double_2);
+                    button.onClick(p_mouseClicked_1_, p_mouseClicked_3_);
                     cir.cancel();
                 }
             }
@@ -85,9 +85,9 @@ public abstract class BookEditScreenMixin extends Screen {
         int y = 0;
 
         for(ChatFormatting color : ChatFormatting.values()) {
-            ColorButtonWidget red = new ColorButtonWidget(color, 2 + x * 20, 2 + y * 20, 16, 16, color.getName(), (widget) -> {
-                this.charTyped('§', 1);
-                this.charTyped(color.getChar(), 0);
+            ColorButtonWidget red = new ColorButtonWidget(color, 2 + x * 20, 2 + y * 20, 16, 16, color.func_225038_b(), (widget) -> {
+                this.charTyped('\u00a7', 1);
+                this.charTyped(color.func_225041_a(), 0);
             });
 
             if(y < 8) {

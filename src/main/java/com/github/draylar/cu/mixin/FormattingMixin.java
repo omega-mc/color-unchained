@@ -1,6 +1,6 @@
 package com.github.draylar.cu.mixin;
 
-import net.minecraft.util.Formatting;
+import net.minecraft.util.text.TextFormatting;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Mutable;
@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 /*
   Mixin that allows custom color formatting in several different areas.
  */
-@Mixin(Formatting.class)
+@Mixin(TextFormatting.class)
 public class FormattingMixin {
 
     @Shadow @Final @Mutable

@@ -6,7 +6,7 @@ import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.text.Text;
+import net.minecraft.util.text.ITextComponent;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 @Mixin(ChatScreen.class)
 public abstract class ChatScreenMixin extends Screen {
 
-    @Shadow protected TextFieldWidget chatField;
+    @Shadow protected TextFieldWidget inputField;
     boolean showColors = false;
 
     ColorToggleWidget colorButton = new ColorToggleWidget(2, 2, 16, 16, "Color", (widget) -> {
@@ -30,8 +30,8 @@ public abstract class ChatScreenMixin extends Screen {
 
     private ArrayList<ColorButtonWidget> colors = new ArrayList<>();
 
-    protected ChatScreenMixin(Text text_1) {
-        super(text_1);
+    protected ChatScreenMixin(ITextComponent titleIn) {
+        super(titleIn);
     }
 
     private void toggleVisible() {
@@ -47,8 +47,8 @@ public abstract class ChatScreenMixin extends Screen {
 
         for(ChatFormatting color : ChatFormatting.values()) {
             index++;
-            ColorButtonWidget red = new ColorButtonWidget(color,18 * index + 3, 2, 16, 16, color.getName(), (widget) -> {
-                chatField.addText("§" + color.getChar());
+            ColorButtonWidget red = new ColorButtonWidget(color,18 * index + 3, 2, 16, 16, color.name(), (widget) -> {
+                inputField.setText("\u00a7" + color.func_225041_a());
             });
 
             colors.add(red);

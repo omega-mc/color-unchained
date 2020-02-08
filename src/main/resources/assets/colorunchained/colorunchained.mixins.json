@@ -1,6 +1,7 @@
 {
   "required": true,
   "package": "com.github.draylar.cu.mixin",
+  "refmap": "main.colorunchained.refmap.json",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "SharedConstantsMixin",
@@ -15,5 +16,6 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  }
+  },
+  "minVersion": "0.8"
 }

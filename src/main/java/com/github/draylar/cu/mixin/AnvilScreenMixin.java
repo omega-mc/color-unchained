@@ -2,10 +2,10 @@ package com.github.draylar.cu.mixin;
 
 import com.github.draylar.cu.client.gui.ColorButtonWidget;
 import com.github.draylar.cu.client.gui.ColorToggleWidget;
-import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.util.TextFormat;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -46,10 +46,10 @@ public abstract class AnvilScreenMixin extends Screen {
     private void init(CallbackInfo ci) {
         int index = 0;
 
-        for(ChatFormatting color : ChatFormatting.values()) {
+        for(TextFormat color : TextFormat.values()) {
             index++;
             ColorButtonWidget red = new ColorButtonWidget(color,18 * index + 3, 2, 16, 16, color.getName(), (widget) -> {
-                nameField.addText("§" + color.getChar());
+                nameField.setText(nameField.getText() + "§" + color.getChar());
                 this.setFocused(nameField);
             });
 

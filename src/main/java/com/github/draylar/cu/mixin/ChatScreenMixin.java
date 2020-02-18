@@ -2,10 +2,10 @@ package com.github.draylar.cu.mixin;
 
 import com.github.draylar.cu.client.gui.ColorButtonWidget;
 import com.github.draylar.cu.client.gui.ColorToggleWidget;
-import com.mojang.realmsclient.gui.ChatFormatting;
 import net.minecraft.client.gui.screen.ChatScreen;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.util.TextFormat;
 import net.minecraft.text.Text;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -45,10 +45,10 @@ public abstract class ChatScreenMixin extends Screen {
     private void init(CallbackInfo ci) {
         int index = 0;
 
-        for(ChatFormatting color : ChatFormatting.values()) {
+        for(TextFormat color : TextFormat.values()) {
             index++;
             ColorButtonWidget red = new ColorButtonWidget(color,18 * index + 3, 2, 16, 16, color.getName(), (widget) -> {
-                chatField.addText("§" + color.getChar());
+                chatField.setText(chatField.getText() + "§" + color.getChar());
             });
 
             colors.add(red);

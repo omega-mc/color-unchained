@@ -1,10 +1,11 @@
 package com.github.draylar.cu.client.gui;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import com.mojang.realmsclient.gui.ChatFormatting;
+import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.TextFormat;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.MathHelper;
 
@@ -14,7 +15,7 @@ public class ColorButtonWidget extends ButtonWidget {
     private int y;
     private Formatting formatting;
 
-    public ColorButtonWidget(ChatFormatting format, int x, int y, int width, int height, String text, PressAction pressAction) {
+    public ColorButtonWidget(TextFormat format, int x, int y, int width, int height, String text, PressAction pressAction) {
         super(x, y, width, height, text, pressAction);
         this.x = x;
         this.y = y;
@@ -28,11 +29,11 @@ public class ColorButtonWidget extends ButtonWidget {
         MinecraftClient client = MinecraftClient.getInstance();
         client.getTextureManager().bindTexture(WIDGETS_LOCATION);
 
-        GlStateManager.color4f(1.0F, 1.0F, 1.0F, this.alpha);
+        RenderSystem.color4f(1.0F, 1.0F, 1.0F, this.alpha);
         int int_3 = this.getYImage(this.isHovered());
-        GlStateManager.enableBlend();
-        GlStateManager.blendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
-        GlStateManager.blendFunc(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA);
+        RenderSystem.enableBlend();
+        RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
+        RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
 
         this.blit(this.x, this.y, 0, 46 + int_3 * 20, this.width / 2, this.height + 4);
         this.blit(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + int_3 * 20, this.width / 2, this.height + 4);

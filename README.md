@@ -1,18 +1,39 @@
-# Fabric Example Mod
+# Color Unchained
 
-Draylar's fork of the fabric-example-mod. Changes package structure to my usual one.
+Color Unchained is a simple mod which allows you to use Minecraft color formatting in different text areas around the game. This includes the chatbox, anvil names, written books, and signs. 
 
-## Setup
+In the 4 relevant GUIs, you'll see a small RGB button in the top left of your screen:
 
-1. Edit build.gradle and mod.json to suit your needs.
-    * The "mixins" object can be removed from mod.json if you do not need to use mixins.
-    * Please replace all occurences of "modid" with your own mod ID - sometimes, a different string may also suffice.
-2. Run the following command:
+![](https://i.imgur.com/eWn1348.png)
 
-```
-./gradlew idea
-```
 
-## License
+Click it to reveal color options along with different formatting types!
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+![](https://i.imgur.com/kVCf2hW.png)
+
+Once you've clicked on the color you want, start typing. You can also use multiple colors and styles in a single message:
+
+![](https://i.imgur.com/vsAy2kh.png)
+
+Signs can be colored in a similar fashion:
+
+![](https://i.imgur.com/pEpfDOq.png)
+
+Want a cool weapon? How about a non-italicized colored name?
+
+![](https://i.imgur.com/Xs42QDz.png)
+
+Books are a beta feature and you may find bugs with it.
+
+![](https://i.imgur.com/rTO3Wa2.png)
+
+If you don't want to use the color button in the chat screen, you can use %% as a replacement for the color format key.
+
+### Credits:
+
+Thanks to everyone on the Fabric discord who helped with hunting down a solution to this issue, as well as the people who helped me with several bugs!
+ 
+### License:
+
+MIT. You can do what you want with the mod and the code used to run it.
+ 

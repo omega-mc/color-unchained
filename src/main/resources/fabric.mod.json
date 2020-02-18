@@ -14,7 +14,7 @@
     "sources": "https://github.com/Draylar/color-unchained"
   },
 
-  "license": "CC0-1.0",
+  "license": "MIT",
   "icon": "assets/colorunchained/icon.png",
 
   "environment": "*",

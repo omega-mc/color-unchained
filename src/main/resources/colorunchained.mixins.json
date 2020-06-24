@@ -1,17 +1,18 @@
 {
   "required": true,
-  "package": "com.github.draylar.cu.mixin",
+  "package": "draylar.cu.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "SharedConstantsMixin",
+    "FormattingAccessor",
+    "FormattingMixin",
     "ServerPlayNetworkHandlerMixin",
-    "FormattingMixin"
+    "SharedConstantsMixin"
   ],
   "client": [
-    "BookEditScreenMixin",
-    "SignEditScreenMixin",
     "AnvilScreenMixin",
-    "ChatScreenMixin"
+    "BookEditScreenMixin",
+    "ChatScreenMixin",
+    "SignEditScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

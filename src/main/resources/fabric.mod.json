@@ -2,7 +2,7 @@
 {
   "schemaVersion": 1,
   "id": "colorunchained",
-  "version": "1.0.2",
+  "version": "${version}",
 
   "name": "Color Unchained",
   "description": "Color Unchained brings color back to your life.",

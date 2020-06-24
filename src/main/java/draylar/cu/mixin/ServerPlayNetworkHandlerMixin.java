@@ -1,4 +1,4 @@
-package com.github.draylar.cu.mixin;
+package draylar.cu.mixin;
 
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import org.spongepowered.asm.mixin.Mixin;
@@ -15,8 +15,8 @@ public class ServerPlayNetworkHandlerMixin {
             value = "INVOKE",
             target = "Ljava/lang/String;startsWith(Ljava/lang/String;)Z",
             shift = At.Shift.BEFORE
-    ), method = "onChatMessage", ordinal = 0)
-    private String onChatMessage(String string_1) {
-        return string_1.replace("%%", "§");
+    ), method = "onGameMessage", ordinal = 0)
+    private String onGameMessage(String message) {
+        return message.replace("%%", "§");
     }
 }

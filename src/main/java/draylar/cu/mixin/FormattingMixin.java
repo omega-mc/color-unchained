@@ -1,4 +1,4 @@
-package com.github.draylar.cu.mixin;
+package draylar.cu.mixin;
 
 import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Final;

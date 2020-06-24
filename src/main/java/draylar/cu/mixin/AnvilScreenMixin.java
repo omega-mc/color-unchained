@@ -1,12 +1,13 @@
-package com.github.draylar.cu.mixin;
+package draylar.cu.mixin;
 
-import com.github.draylar.cu.client.gui.ColorButtonWidget;
-import com.github.draylar.cu.client.gui.ColorToggleWidget;
+import draylar.cu.client.gui.ColorButtonWidget;
+import draylar.cu.client.gui.ColorToggleWidget;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
-import net.minecraft.client.util.TextFormat;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -25,7 +26,7 @@ public abstract class AnvilScreenMixin extends Screen {
     @Shadow private TextFieldWidget nameField;
     boolean showColors = false;
 
-    ColorToggleWidget colorButton = new ColorToggleWidget(2, 2, 16, 16, "Color", (widget) -> {
+    ColorToggleWidget colorButton = new ColorToggleWidget(2, 2, 16, 16, new LiteralText("Color"), (widget) -> {
         toggleVisible();
     });
 
@@ -42,14 +43,14 @@ public abstract class AnvilScreenMixin extends Screen {
     }
 
 
-    @Inject(at = @At("HEAD"), method = "init")
+    @Inject(at = @At("HEAD"), method = "setup")
     private void init(CallbackInfo ci) {
         int index = 0;
 
-        for(TextFormat color : TextFormat.values()) {
+        for(Formatting color : Formatting.values()) {
             index++;
-            ColorButtonWidget red = new ColorButtonWidget(color,18 * index + 3, 2, 16, 16, color.getName(), (widget) -> {
-                nameField.setText(nameField.getText() + "§" + color.getChar());
+            ColorButtonWidget red = new ColorButtonWidget(color,18 * index + 3, 2, 16, 16, new LiteralText(color.getName()), (widget) -> {
+                nameField.setText(nameField.getText() + "§" + ((FormattingAccessor) (Object) color).getCode());
                 this.setFocused(nameField);
             });
 

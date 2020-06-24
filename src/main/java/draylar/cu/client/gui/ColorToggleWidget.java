@@ -1,32 +1,35 @@
-package com.github.draylar.cu.client.gui;
+package draylar.cu.client.gui;
 
 import com.mojang.blaze3d.platform.GlStateManager;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.Text;
 
 import java.awt.*;
 
 public class ColorToggleWidget extends ButtonWidget {
 
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
 
     int index = 0;
 
-    private PressAction pressAction;
+    private final PressAction pressAction;
 
-    public ColorToggleWidget(int x, int y, int width, int height, String text, PressAction pressAction) {
+    public ColorToggleWidget(int x, int y, int width, int height, Text text, PressAction pressAction) {
         super(x, y, width, height, text, pressAction);
+
         this.x = x;
         this.y = y;
         this.pressAction = pressAction;
     }
 
     @Override
-    public void onClick(double double_1, double double_2) {
-        super.onClick(double_1, double_2);
+    public void onClick(double x, double y) {
+        super.onClick(x, y);
     }
 
     public void onPress() {
@@ -34,7 +37,7 @@ public class ColorToggleWidget extends ButtonWidget {
     }
 
     @Override
-    public void render(int mouseX, int mouseY, float float_1) {
+    public void render(MatrixStack stack, int mouseX, int mouseY, float float_1) {
         MinecraftClient client = MinecraftClient.getInstance();
         client.getTextureManager().bindTexture(WIDGETS_LOCATION);
 
@@ -44,15 +47,15 @@ public class ColorToggleWidget extends ButtonWidget {
         RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
         RenderSystem.blendFunc(GlStateManager.SrcFactor.SRC_ALPHA, GlStateManager.DstFactor.ONE_MINUS_SRC_ALPHA);
 
-        this.blit(this.x, this.y, 0, 46 + int_3 * 20, this.width / 2, this.height + 4);
-        this.blit(this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + int_3 * 20, this.width / 2, this.height + 4);
+        this.drawTexture(stack, this.x, this.y, 0, 46 + int_3 * 20, this.width / 2, this.height + 4);
+        this.drawTexture(stack, this.x + this.width / 2, this.y, 200 - this.width / 2, 46 + int_3 * 20, this.width / 2, this.height + 4);
 
 
         double red = Math.sin(.03 * index + 0) * 127 + 128;
         double green = Math.sin(.03 * index + 2) * 127 + 128;
         double blue = Math.sin(.03 * index + 4) * 127 + 128;
 
-        DrawableHelper.fill(x + 5, y + 5, x + 11, y + 14, new Color((int) red, (int) green, (int) blue).getRGB());
+        DrawableHelper.fill(stack,x + 5, y + 5, x + 11, y + 14, new Color((int) red, (int) green, (int) blue).getRGB());
 
         index++;
 
